@@ -1,0 +1,15 @@
+# Personal working copies — never publish.
+# sanitize.py reads from here and writes brand-safe versions to workflows/.
+private/
+
+# Scratch, experiments, third-party graphs.
+other/
+
+# ComfyUI / OS noise
+*.ckpt
+*.safetensors
+*.pt
+__pycache__/
+.DS_Store
+Thumbs.db
+desktop.ini
