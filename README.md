@@ -5,18 +5,20 @@ upscale and partial-denoise refine on the same seed. Built for portrait work at
 1152×1728, with a side-by-side comparer so you can see exactly what the refine pass
 bought you.
 
-| | Nodes | What it is |
+These are not a migration path — v1 is the lean one. Pick the one that matches how
+much control you want.
+
+| | Nodes | What it adds |
 |---|---|---|
 | **[None-v1](workflows/None-v1.json)** | 21 | Two-stage base → refine, master LoRA strength, image comparer |
-
-More versions land as they settle — see [CHANGELOG.md](CHANGELOG.md).
+| **[None-v2](workflows/None-v2.json)** | 26 | Bypassable LoRA stack, group muters, per-stage `SaveImage` |
 
 ## How it works
 
 ```
 UNET + CLIP + VAE
         │
-   [ LoRA Stack ]  ← 5 slots, one master strength
+   [ LoRA Stack ]  ← 5 slots, bypassable as a group
         │
         ├─ Stage 1 · Base ────  1152×1728, 8 steps, denoise 1.0
         │                              │
@@ -42,14 +44,19 @@ empty. One positive prompt feeds both stages.
 
 **Custom nodes**
 
-- [rgthree-comfy](https://github.com/rgthree/rgthree-comfy) — Image Comparer
+- [rgthree-comfy](https://github.com/rgthree/rgthree-comfy) — Image Comparer, Fast Groups Muter/Bypasser
 
 ## Setup
 
 1. Drag the `.json` onto your ComfyUI canvas.
 2. **Fill the LoRA slots.** They ship empty at strength `1.0` — the published graphs
-   carry no LoRA names.
+   carry no LoRA names. Bypass the *LoRA Stack* group if you want the raw model.
 3. Write your prompt in the *Prompt* group.
+
+### Quick switches (v2)
+
+- **LoRA Stack** off → model passes straight through
+- **Stage 2 / Compare** off → stop after the base image
 
 ## Publishing
 
@@ -60,7 +67,7 @@ file that still contains a drive-letter path.
 
 ```bash
 python tools/sanitize.py           # all
-python tools/sanitize.py None-v1   # one
+python tools/sanitize.py None-v2   # one
 ```
 
 ## License

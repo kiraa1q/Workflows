@@ -1,0 +1,1347 @@
+{
+  "id": "51ad2734-8ac2-43c1-856a-4a777561031f",
+  "revision": 0,
+  "last_node_id": 45,
+  "last_link_id": 49,
+  "nodes": [
+    {
+      "id": 13,
+      "type": "EmptySD3LatentImage",
+      "pos": [
+        -80,
+        -630
+      ],
+      "size": [
+        380,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            10
+          ]
+        }
+      ],
+      "title": "Empty latent  —  1152x1728  =  1.99 MP",
+      "properties": {
+        "Node name for S&R": "EmptySD3LatentImage"
+      },
+      "widgets_values": [
+        1152,
+        1728,
+        1
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 17,
+      "type": "LatentUpscaleBy",
+      "pos": [
+        360,
+        -630
+      ],
+      "size": [
+        380,
+        130
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            18
+          ]
+        }
+      ],
+      "title": "Latent upscale  —  bislerp  —  2.0x",
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "bislerp",
+        2
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 3,
+      "type": "UNETLoader",
+      "pos": [
+        -1080,
+        -630
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            1
+          ]
+        }
+      ],
+      "title": "Diffusion Model",
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "krea2TurboFP8_krea2TURBO.safetensors",
+        "default"
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -600,
+        -280
+      ],
+      "size": [
+        460,
+        120
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            7,
+            9
+          ]
+        }
+      ],
+      "title": "Negative  —  inert at CFG 1",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 44,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        -1520,
+        -630
+      ],
+      "size": [
+        380,
+        70
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Bypass  —  LoRAs",
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "LoRA Stack",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default",
+        "Node name for S&R": "Fast Groups Bypasser (rgthree)"
+      },
+      "color": "#3b3320",
+      "bgcolor": "#22201a"
+    },
+    {
+      "id": 4,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1080,
+        -110
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            39
+          ]
+        }
+      ],
+      "title": "LoRA 1",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "",
+        1.0
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 29,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1080,
+        40
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 39
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            40
+          ]
+        }
+      ],
+      "title": "LoRA 2",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "",
+        1.0
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 30,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1080,
+        190
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 40
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            41
+          ]
+        }
+      ],
+      "title": "LoRA 3",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "",
+        1.0
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 31,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1080,
+        340
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            42
+          ]
+        }
+      ],
+      "title": "LoRA 4",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "",
+        1.0
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 32,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1080,
+        490
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 42
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            2,
+            3
+          ]
+        }
+      ],
+      "title": "LoRA 5",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "",
+        1.0
+      ],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 5,
+      "type": "CLIPLoader",
+      "pos": [
+        -1080,
+        -480
+      ],
+      "size": [
+        420,
+        130
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            4,
+            5
+          ]
+        }
+      ],
+      "title": "Text Encoder",
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_4b_fp8_scaled.safetensors",
+        "krea2",
+        "default"
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 6,
+      "type": "VAELoader",
+      "pos": [
+        -1080,
+        -310
+      ],
+      "size": [
+        420,
+        80
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            15,
+            20
+          ]
+        }
+      ],
+      "title": "VAE",
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 45,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        -1520,
+        -520
+      ],
+      "size": [
+        380,
+        90
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Mute  —  Stages",
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "Stage 2|Compare",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default",
+        "Node name for S&R": "Fast Groups Muter (rgthree)"
+      },
+      "color": "#3b3320",
+      "bgcolor": "#22201a"
+    },
+    {
+      "id": 43,
+      "type": "MarkdownNote",
+      "pos": [
+        -1520,
+        -840
+      ],
+      "size": [
+        380,
+        110
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Info  —  Quick Switches",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "## Quick Switches\n\n**LoRA Stack** off = model passes straight through.\n**Stage 2 / Compare** off = stop after the base image."
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 1,
+      "type": "MarkdownNote",
+      "pos": [
+        -1080,
+        -840
+      ],
+      "size": [
+        420,
+        130
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "None V3 Workflow",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "# None V3  —  Krea2 Workflow\n\nThis workflow is made by @kira1q\n\nV3 saves through **ComfyUI Image Saver**."
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 40,
+      "type": "MarkdownNote",
+      "pos": [
+        -600,
+        -840
+      ],
+      "size": [
+        460,
+        110
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Info  —  Prompt",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "## Prompt\n\nOne prompt feeds **both** stages.\nCFG is 1, so the negative box is inert — leave it empty."
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 41,
+      "type": "MarkdownNote",
+      "pos": [
+        -80,
+        -840
+      ],
+      "size": [
+        380,
+        110
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Info  —  Stage 1",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "## Stage 1  —  Base\n\n1152 x 1728 (1.99 MP), full denoise.\n**Preview only** — nothing is written to disk."
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 42,
+      "type": "MarkdownNote",
+      "pos": [
+        360,
+        -840
+      ],
+      "size": [
+        380,
+        110
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Info  —  Stage 2",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "## Stage 2  —  Refine\n\n2.0x latent upscale, partial denoise on the Stage 1 seed.\nWritten by **Image Saver** to `Output\\Krea2\\Raw`, workflow embedded.\nMove keepers over to `Output\\Krea2\\Approved`."
+      ],
+      "color": "#171717",
+      "bgcolor": "#0e0e0e"
+    },
+    {
+      "id": 18,
+      "type": "KSampler",
+      "pos": [
+        360,
+        -460
+      ],
+      "size": [
+        380,
+        500
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            19
+          ]
+        }
+      ],
+      "title": "KSampler 2  —  Refine  —  3/0.4 = 7.5",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "randomize",
+        3,
+        1,
+        "euler",
+        "simple",
+        0.4
+      ],
+      "color": "#2e2e2e",
+      "bgcolor": "#1c1c1c"
+    },
+    {
+      "id": 14,
+      "type": "KSampler",
+      "pos": [
+        -80,
+        -460
+      ],
+      "size": [
+        380,
+        500
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 6
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 7
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            14,
+            17
+          ]
+        }
+      ],
+      "title": "KSampler 1  —  Base",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "randomize",
+        8,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "color": "#2e2e2e",
+      "bgcolor": "#1c1c1c"
+    },
+    {
+      "id": 19,
+      "type": "VAEDecode",
+      "pos": [
+        360,
+        80
+      ],
+      "size": [
+        380,
+        80
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 19
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            21,
+            27
+          ]
+        }
+      ],
+      "title": "Decode Refined",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 20,
+      "type": "Image Saver Simple",
+      "pos": [
+        360,
+        200
+      ],
+      "size": [
+        380,
+        390
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 21
+        },
+        {
+          "name": "metadata",
+          "shape": 7,
+          "type": "METADATA",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "hashes",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "a1111_params",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Out 2  —  Refined  —  Image Saver",
+      "properties": {
+        "Node name for S&R": "Image Saver Simple"
+      },
+      "widgets_values": [
+        "02_refined_%time",
+        "output/None/Raw",
+        "png",
+        true,
+        100,
+        false,
+        true,
+        false,
+        0,
+        "%Y-%m-%d-%H%M%S",
+        true
+      ],
+      "color": "#3b3320",
+      "bgcolor": "#22201a"
+    },
+    {
+      "id": 15,
+      "type": "VAEDecode",
+      "pos": [
+        -80,
+        80
+      ],
+      "size": [
+        380,
+        80
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            16,
+            26
+          ]
+        }
+      ],
+      "title": "Decode Base",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 16,
+      "type": "PreviewImage",
+      "pos": [
+        -80,
+        200
+      ],
+      "size": [
+        380,
+        380
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 16
+        }
+      ],
+      "outputs": [],
+      "title": "Preview 1  —  Base",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "color": "#242424",
+      "bgcolor": "#161616"
+    },
+    {
+      "id": 24,
+      "type": "Image Comparer (rgthree)",
+      "pos": [
+        -600,
+        -40
+      ],
+      "size": [
+        460,
+        640
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 26
+        },
+        {
+          "dir": 3,
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "images",
+          "shape": 3,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "Compare  —  Base / Refined",
+      "properties": {
+        "comparer_mode": "Slide",
+        "Node name for S&R": "Image Comparer (rgthree)"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_kbndg_00003_.png&type=temp&subfolder=&rand=0.7782954974514883"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_kbndg_00004_.png&type=temp&subfolder=&rand=0.04419267720613418"
+          }
+        ]
+      ],
+      "color": "#2e2e2e",
+      "bgcolor": "#1c1c1c"
+    },
+    {
+      "id": 8,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -600,
+        -630
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            6,
+            8
+          ]
+        }
+      ],
+      "title": "Positive prompt",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#3b3320",
+      "bgcolor": "#22201a"
+    }
+  ],
+  "links": [
+    [
+      1,
+      3,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      32,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      32,
+      0,
+      18,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      5,
+      0,
+      8,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      5,
+      0,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      8,
+      0,
+      14,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      9,
+      0,
+      14,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      8,
+      8,
+      0,
+      18,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      9,
+      0,
+      18,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      10,
+      13,
+      0,
+      14,
+      3,
+      "LATENT"
+    ],
+    [
+      14,
+      14,
+      0,
+      15,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      6,
+      0,
+      15,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      15,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      14,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      18,
+      17,
+      0,
+      18,
+      3,
+      "LATENT"
+    ],
+    [
+      19,
+      18,
+      0,
+      19,
+      0,
+      "LATENT"
+    ],
+    [
+      20,
+      6,
+      0,
+      19,
+      1,
+      "VAE"
+    ],
+    [
+      21,
+      19,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      26,
+      15,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      19,
+      0,
+      24,
+      1,
+      "IMAGE"
+    ],
+    [
+      39,
+      4,
+      0,
+      29,
+      0,
+      "MODEL"
+    ],
+    [
+      40,
+      29,
+      0,
+      30,
+      0,
+      "MODEL"
+    ],
+    [
+      41,
+      30,
+      0,
+      31,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      31,
+      0,
+      32,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 10,
+      "title": "Quick Switches",
+      "bounding": [
+        -1540,
+        -710,
+        420,
+        300
+      ],
+      "color": "#3b3320",
+      "flags": {}
+    },
+    {
+      "id": 1,
+      "title": "Models  —  Loaders",
+      "bounding": [
+        -1100,
+        -710,
+        460,
+        500
+      ],
+      "flags": {}
+    },
+    {
+      "id": 11,
+      "title": "LoRA Stack",
+      "bounding": [
+        -1100,
+        -190,
+        460,
+        810
+      ],
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Prompt",
+      "bounding": [
+        -620,
+        -710,
+        500,
+        570
+      ],
+      "color": "#3b3320",
+      "flags": {}
+    },
+    {
+      "id": 8,
+      "title": "Compare —  Base / Refine",
+      "bounding": [
+        -620,
+        -120,
+        500,
+        740
+      ],
+      "color": "#444",
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "Stage 1  —  Base",
+      "bounding": [
+        -100,
+        -710,
+        420,
+        1310
+      ],
+      "color": "#444",
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Stage 2  —  Refine",
+      "bounding": [
+        340,
+        -710,
+        420,
+        1310
+      ],
+      "color": "#444",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5730855330116956,
+      "offset": [
+        784.9726812214676,
+        1148.0188556155326
+      ]
+    },
+    "frontendVersion": "1.45.20"
+  },
+  "version": 0.4
+}
